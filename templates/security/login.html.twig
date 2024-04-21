@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+<div class="container bg-light mt-2">
+    <div class="row">
+        <div class="col-lg-6 md-12 m-auto my-3">
+            <form method="post">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                {% if app.user %}
+                    <div class="mb-3">
+                        Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                    </div>
+                {% endif %}
+
+                <h1 class="Text-center">Connexion</h1>
+                <div class="input-group mb-3">
+                    <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                    <input type="email" value="{{ last_username }}" name="email" placeholder="E-mail" class="form-control" autocomplete="email" required autofocus>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                    <input type="password" name="password"  placeholder="Mot de passe" class="form-control" autocomplete="current-password" required>
+                </div>
+                <input type="hidden" name="_csrf_token"
+                    value="{{ csrf_token('authenticate') }}"
+                >
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-success">Se connecter</button>
+                    <p class="text-center">N'avez vous pas de compte ? <a href={{path('app_register')}}>Inscription</a></p>
+                </div>
+            </form>
+    
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

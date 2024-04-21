@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Acceuil{% endblock %}
+
+{% block body %}
+<div class="container-fluid p-2 " >
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="my-carousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active c-item">
+                    <img src={{asset('assets/image/image_site/image1.jpg')}} class="d-block w-100 c-image" alt="dzeef">
+                    </div>
+                    <div class="carousel-item c-item">
+                    <img src={{asset('assets/image/image_site/image2.jpg')}} class="d-block w-100 c-image" alt="cxwfhcj">
+                    </div>
+                    <div class="carousel-item c-item">
+                    <img src={{asset('assets/image/image_site/image3.jpg')}} class="d-block w-100 c-image" alt="vgcgv">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+            
+    </div>
+</div>
+
+
+
+{# Formulaire de filtre #}
+<div class="container disponibilite-form">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 bg-light p-4 rounded ">
+                <form>
+                    <div class="row d-flex align-items-end">
+                        <div class="col-lg-3 col-md-3 mb-3">
+                            <label class="form-label" style="font-weight:500,">Date d'arrivée</label>
+                            <input type="date" class="form-control shadow-none">
+                        </div>
+                        <div class="col-lg-3 col-md-3 mb-3">
+                            <label class="form-label" style="font-weight:500,">Date départ</label>
+                            <input type="date" class="form-control shadow-none">
+                        </div>
+                    
+                    
+                        <div class="col-lg-2 col-md-2 mb-3">
+                            <label class="form-label" style="font-weight:500,">Adultes</label>
+                            <select class="form-select shadow-none" aria-label="Default select example">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 mb-3">
+                            <label class="form-label" style="font-weight:500,">Enfants</label>
+                            <select class="form-select shadow-none" aria-label="Default select example">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-1 col-md-1 mb-lg-3 mt-2">
+                            <button type="submit" class="btn text-white boutton">Rechercher</button>
+                    </div>
+                    
+                        
+                    
+                </form>
+            </div>
+            
+            
+        
+        </div>
+    
+</div>
+
+
+{% endblock %}
