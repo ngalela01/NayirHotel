@@ -1,0 +1,65 @@
+/* // <uniquifier>: Use a unique and descriptive class name
+// <weight>: Use a value from 300 to 900
+
+.merienda-<uniquifier> {
+  font-family: "Merienda", cursive;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+} */
+
+/* .poppins-regular {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .poppins-medium {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+  }
+  
+  .poppins-semibold {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+  }
+   */
+/* ***********************************************************************/
+body {
+    font-family: "Poppins", sans-serif;
+    
+}
+.h-font {
+    font-family: "Merienda", cursive;
+}
+
+.c-item {
+    height: 480px;
+}
+.c-image {
+    height: 100%;
+    object-fit: cover; /* ou 'contain' selon vos préférences */
+    height: 100%; /* Assurez-vous que l'image prend toute la hauteur de son conteneur */
+    width: 100%; /* Assurez-vous que l'image prend toute la largeur de son conteneur */
+}
+
+
+
+
+
+.boutton{
+  background-color: #2ec1ac;
+}
+.boutton:hover{
+  background-color: #279e8c;
+}
+
+
+.disponibilite-form{
+  margin-top: -50px;
+  z-index: 2;
+  position: relative;
+}
+
