@@ -28,6 +28,9 @@ class TypeDeChambre
     #[ORM\OneToMany(targetEntity: Chambre::class, mappedBy: 'typeDeChambre', orphanRemoval: true)]
     private Collection $chambres;
 
+    #[ORM\Column]
+    private ?bool $statut = null;
+
     public function __construct()
     {
         $this->chambres = new ArrayCollection();
@@ -94,6 +97,18 @@ class TypeDeChambre
     public function __toString()
     {
         return $this->nom;
+    }
+
+    public function isStatut(): ?bool
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(bool $statut): static
+    {
+        $this->statut = $statut;
+
+        return $this;
     }
 
 }

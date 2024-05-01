@@ -1,35 +1,39 @@
-<nav class=" ma-navbar navbar navbar-expand-lg bg-xhite px-lg-3 py-lg-2 shadow-sm sticky-top ">
-  <div class="container-fluid ">
-    <a class="navbar-brand me-5 fw-bold fs-3 h-font" href="#">NayirHotel</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
-        <li class="nav-item">
-          <a class="nav-link active me-2" aria-current="page" href="#">Acceuil</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link me-2" href="#">Chambre</a>
-        </li>
-        <li class="nav-item ">
-          <a class="nav-link me-2" href="#">Contact</a>
-        </li>
-        <li class="nav-item">
-          <a href={{path('admin')}} class="nav-link me-2 " aria-disabled="true">Admin</a>
-        </li>
-      </ul>
-        <div class="d-flex " >
-          <a href={{ path('app_register') }} class="btn btn-outline-dark  me-lg-2 me-3" >
-            Inscription
-          </a>
-          <a href={{ path('app_login') }} class="btn btn-outline-dark  me-lg-2 me-3" >
-            Connexion
-          </a>
 
+<!-- Header Start -->
+        <div class="container-fluid bg-dark px-0">
+            <div class="row gx-0">
+                <div class="col-lg-3 bg-dark d-none d-lg-block">
+                    <a href="index.html" class="navbar-brand w-100 h-100 m-0 p-0 d-flex align-items-center justify-content-center">
+                        <h1 class="m-0 text-primary text-uppercase">NayirHotel</h1>
+                    </a>
+                </div>
+                <div class="col-lg-9 border border-dark">
+                    
+                    <nav class="navbar navbar-expand-lg bg-dark navbar-dark p-3 p-lg-0">
+                        <a href="#" class="navbar-brand d-block d-lg-none">
+                            <h1 class="m-0 text-primary text-uppercase">NayirHotel</h1>
+                        </a>
+                        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                            <div class="navbar-nav mr-auto py-0">
+                                <a href={{ path('app_acceuil') }} class="nav-item nav-link active">Acceuil</a>
+                                <a href="" class="nav-item nav-link">A Propos</a>
+                                <a href="" class="nav-item nav-link">Services</a>
+                                <a href="" class="nav-item nav-link">Chambres</a>
+                                <a href="" class="nav-item nav-link">Contact</a>
+                            </div>
+                            <!-- Conteneur pour les boutons de connexion et de déconnexion -->
+                            <div class="navbar-nav ml-auto py-0 ">
+                                <a class='btn btn-primary me-2' href={{ path('app_login') }}>Connexion</a>
+                                <a class='btn btn-secondary me-2 d-none d-lg-block' href={{ path('app_register') }}>Inscription</a>
+                            </div>
+                            
+                        </div>
+                        
+                    </nav>
+                </div>
+            </div>
         </div>
-    </div>
-  </div>
-
-</nav>
-
+        <!-- Header End -->

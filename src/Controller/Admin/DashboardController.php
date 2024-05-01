@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\User;
 use App\Entity\Images;
 use App\Entity\Chambre;
+use App\Entity\Service;
 use App\Entity\TypeDeChambre;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,7 +20,7 @@ class DashboardController extends AbstractDashboardController
     public function index(): Response
     {
         
-        return $this->render('admin/dashboard.html.twig');
+        return $this->render('bundles/EasyAdminBundle/welcome.html.twig');
     }
     public function configureAssets(): Assets
     {
@@ -40,6 +41,7 @@ class DashboardController extends AbstractDashboardController
          yield MenuItem::linkToCrud('Utilisateur', 'fas fa-user', User::class)->setCssClass('.nayir');
          yield MenuItem::linkToCrud('Type de chambre', 'fas fa-list', TypeDeChambre::class);
          yield MenuItem::linkToCrud('Les chambres', 'fas fa-list', Chambre::class);
+         yield MenuItem::linkToCrud('Sevices', 'fas fa-table-list', Service::class);
          yield MenuItem::linkToCrud('Images', 'fas fa-image', Images::class);
     }
     

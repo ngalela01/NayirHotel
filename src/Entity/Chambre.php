@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ChambreRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ChambreRepository::class)]
@@ -18,17 +19,16 @@ class Chambre
     #[ORM\Column]
     private ?int $numero = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $capaciteAdulte = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $capaciteEnfant = null;
 
     #[ORM\Column(nullable: true)]
     private ?bool $statut = null;
 
-    #[ORM\Column]
-    private ?float $prix = null;
+    
 
     #[ORM\ManyToOne(inversedBy: 'chambres')]
     #[ORM\JoinColumn(nullable: false)]
@@ -37,12 +37,22 @@ class Chambre
     /**
      * @var Collection<int, Images>
      */
-    #[ORM\OneToMany(targetEntity: Images::class, mappedBy: 'chambre')]
+    #[ORM\OneToMany(targetEntity: Images::class, mappedBy: 'chambre', cascade: ["persist","remove"])]
     private Collection $images;
+
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 0)]
+    private ?string $prix = null;
+
+    /**
+     * @var Collection<int, Service>
+     */
+    #[ORM\OneToMany(targetEntity: Service::class, mappedBy: 'chambre')]
+    private Collection $services;
 
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->services = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -98,17 +108,8 @@ class Chambre
         return $this;
     }
 
-    public function getPrix(): ?float
-    {
-        return $this->prix;
-    }
-
-    public function setPrix(float $prix): static
-    {
-        $this->prix = $prix;
-
-        return $this;
-    }
+    
+   
 
     public function getTypeDeChambre(): ?TypeDeChambre
     {
@@ -154,5 +155,47 @@ class Chambre
     public function __toString()
     {
         return $this->numero;
+    }
+
+    public function getPrix(): ?string
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(string $prix): static
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Service>
+     */
+    public function getServices(): Collection
+    {
+        return $this->services;
+    }
+
+    public function addService(Service $service): static
+    {
+        if (!$this->services->contains($service)) {
+            $this->services->add($service);
+            $service->setChambre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeService(Service $service): static
+    {
+        if ($this->services->removeElement($service)) {
+            // set the owning side to null (unless already changed)
+            if ($service->getChambre() === $this) {
+                $service->setChambre(null);
+            }
+        }
+
+        return $this;
     }
 }

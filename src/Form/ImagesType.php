@@ -15,14 +15,7 @@ class ImagesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nomImage')
-            ->add('updatedAt', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('chambre', EntityType::class, [
-                'class' => Chambre::class,
-                'choice_label' => 'id',
-            ])
+            
             ->add('imageFile', VichImageType::class);
         
     }

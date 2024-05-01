@@ -4,12 +4,13 @@ namespace App\Controller\Admin;
 
 use App\Entity\Images;
 use App\Form\ImagesType;
-use Symfony\Component\Security\Core\Role\Role;
+use Symfony\Component\Routing\Annotation\Route;
+use Vich\UploaderBundle\Form\Type\VichFileType;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
@@ -17,6 +18,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Form\Type\FileUploadType;
 
 class ImagesCrudController extends AbstractCrudController
 {
@@ -25,24 +27,39 @@ class ImagesCrudController extends AbstractCrudController
         return Images::class;
     }
 
-    // public function configureCrud(Crud $crud): Crud
-    // {
-    //     return $crud
-    //     ->showEntityActionsInlined();
-    // }
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+        ->showEntityActionsInlined()
+        
+        ;
+        
+    }
+   
+           
     
    
     
     public function configureFields(string $pageName): iterable
+    
     {
         return [
             IdField::new('id')->onlyOnIndex(),
-            ImageField::new('nomImage')->onlyOnIndex()->setBasePath('/uploads/images/'),
             AssociationField::new('chambre'),
+            ImageField::new('nomImage')->setLabel('Image')->setBasePath('/uploads/images')
+                                        ->setUploadDir('/public/uploads/images/')
+                                        ->onlyOnIndex(),
             TextareaField::new('imageFile')
-            ->setFormType(VichImageType::class) // Utiliser VichImageType pour le champ imageFile
-            ->onlyOnForms(),
-            
+                ->setLabel('Votre image')
+                ->setFormType(VichImageType::class)
+                ->onlyOnForms()
+                ->setFormTypeOption('allow_delete', false),
+                
+                
+                
+                
+                
+      
                 
         ];
     }
