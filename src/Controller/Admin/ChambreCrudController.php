@@ -13,15 +13,16 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 
 class ChambreCrudController extends AbstractCrudController
 {  
@@ -62,6 +63,13 @@ class ChambreCrudController extends AbstractCrudController
             MoneyField::new('prix')->setCurrency('EUR'),
             CollectionField::new('images')->setEntryType(ImagesType::class)->onlyOnForms(),
             BooleanField::new('statut')->setLabel('Publié'),
+            AssociationField::new('services')
+            ->onlyOnForms()
+                ->setLabel('Services')
+                ->autocomplete()
+                ->setFormTypeOptions([
+                    'multiple' => true, // Permet la sélection multiple
+                ]),
             
         ];
     }

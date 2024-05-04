@@ -14,28 +14,26 @@ class Service
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::ARRAY)]
-    private array $nomService = [];
+    
 
     #[ORM\ManyToOne(inversedBy: 'services')]
     private ?Chambre $chambre = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $nomService = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $description = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $icone = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getNomService(): array
-    {
-        return $this->nomService;
-    }
-
-    public function setNomService(array $nomService): static
-    {
-        $this->nomService = $nomService;
-
-        return $this;
-    }
+   
 
     public function getChambre(): ?Chambre
     {
@@ -45,6 +43,46 @@ class Service
     public function setChambre(?Chambre $chambre): static
     {
         $this->chambre = $chambre;
+
+        return $this;
+    }
+
+    public function getNomService(): ?string
+    {
+        return $this->nomService;
+    }
+
+    public function setNomService(string $nomService): static
+    {
+        $this->nomService = $nomService;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): static
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return $this->nomService;
+    }
+
+    public function getIcone(): ?string
+    {
+        return $this->icone;
+    }
+
+    public function setIcone(string $icone): static
+    {
+        $this->icone = $icone;
 
         return $this;
     }

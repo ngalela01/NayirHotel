@@ -46,8 +46,8 @@ class ImagesCrudController extends AbstractCrudController
         return [
             IdField::new('id')->onlyOnIndex(),
             AssociationField::new('chambre'),
-            ImageField::new('nomImage')->setLabel('Image')->setBasePath('/uploads/images')
-                                        ->setUploadDir('/public/uploads/images/')
+            ImageField::new('nomImage')->setLabel('Image')->setBasePath('/asset/uploads/images')
+                                        ->setUploadDir('/public/asset//uploads/images/')
                                         ->onlyOnIndex(),
             TextareaField::new('imageFile')
                 ->setLabel('Votre image')
