@@ -21,12 +21,16 @@
     {# debut barre de recherche  #}
         {{ include('partials/_booking.html.twig') }}
     {# fin barre de recherche  #}
-
     <div class="container">
         <div class="text-center " >
             <h6 class="section-title text-center text-primary text-uppercase">Contacter nous</h6>
             <h1 class="mb-5"><span class="text-primary text-uppercase">Nous Contactez</span> pour toute question</h1>
         </div>
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
         <div class="row g-4">
             <div class="col-md-6" >
 
@@ -34,40 +38,30 @@
                 
             </div>
             <div class="col-md-6">
-                <form>
+                {{ form_start(form) }}
                     <div class="row g-3">
                         <div class="col-md-6">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="name" placeholder="Your Name">
-                                <label for="name">Your Name</label>
-                            </div>
+                            {{ form_widget(form.nom,{'attr':{'placeholder':'Votre nom'}}) }}
                         </div>
                         <div class="col-md-6">
-                            <div class="form-floating">
-                                <input type="email" class="form-control" id="email" placeholder="Your Email">
-                                <label for="email">Your Email</label>
-                            </div>
+                            {{ form_widget(form.email,{'attr':{'placeholder':'Votre E-mail'}}) }}
                         </div>
                         <div class="col-12">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="subject" placeholder="Subject">
-                                <label for="subject">Subject</label>
-                            </div>
+                            {{ form_widget(form.sujet,{'attr':{'placeholder':'Sujet'}}) }}
                         </div>
                         <div class="col-12">
-                            <div class="form-floating">
-                                <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 150px"></textarea>
-                                <label for="message">Message</label>
-                            </div>
+                            {{ form_widget(form.message,{'attr':{'placeholder':'Votre message'}}) }}
                         </div>
                         <div class="col-12">
-                            <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
+                            <button class="btn btn-primary w-100 py-3" type="submit">Envoyer le message</button>
                         </div>
                     </div>
-                </form>
+                {{ form_end(form) }}
                 
             </div>
         
         </div>
     </div>
+
+    
 {% endblock %}
