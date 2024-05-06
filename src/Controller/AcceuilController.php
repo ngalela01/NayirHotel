@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Chambre;
 use App\Entity\Service;
+use App\Repository\ChambreRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -15,10 +17,12 @@ class AcceuilController extends AbstractController
     public function index(EntityManagerInterface $em): Response
     {   // Récupérer tous les services depuis la base de données
         $services = $em->getRepository(Service::class)->findAll();
+        $chambres= $em->getRepository(Chambre::class)->findAll();
 
         // Passer les services récupérés au template Twig pour l'affichage
         return $this->render('acceuil/index.html.twig', [
             'services' => $services,
+            'chambres' => $chambres,
             
         ]);
     }

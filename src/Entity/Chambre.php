@@ -49,6 +49,12 @@ class Chambre
     #[ORM\OneToMany(targetEntity: Service::class, mappedBy: 'chambre')]
     private Collection $services;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $lits = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $sallesDeBain = null;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -195,6 +201,30 @@ class Chambre
                 $service->setChambre(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLits(): ?int
+    {
+        return $this->lits;
+    }
+
+    public function setLits(?int $lits): static
+    {
+        $this->lits = $lits;
+
+        return $this;
+    }
+
+    public function getSallesDeBain(): ?int
+    {
+        return $this->sallesDeBain;
+    }
+
+    public function setSallesDeBain(?int $sallesDeBain): static
+    {
+        $this->sallesDeBain = $sallesDeBain;
 
         return $this;
     }
