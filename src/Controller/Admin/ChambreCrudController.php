@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Chambre;
+use App\Entity\Service;
 use App\Form\ImagesType;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -57,17 +58,23 @@ class ChambreCrudController extends AbstractCrudController
             CollectionField::new('images')->setEntryType(ImagesType::class)->onlyOnForms(),
             BooleanField::new('statut')->setLabel('Publié'),
             AssociationField::new('services')
-            ->onlyOnForms()
-                ->setLabel('Services')
-                ->autocomplete()
-                ->setFormTypeOptions([
-                    'multiple' => true, // Permet la sélection multiple
-                ]),
+            ->setFormTypeOptions([
+                'multiple' => true, // Permet la sélection multiple de services
+                'by_reference' => false, // Gère correctement les relations ManyToMany
+                
+                
+            ])
+            
+            
+                            
+                
             
         ];
     }
     
+    
    
+
 
     
 }

@@ -27,7 +27,11 @@
                                     <div class="d-flex mb-3">
                                         <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>{{chambre.lits}} lits</small>
                                         <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>{{chambre.sallesDeBain}} Salle de bains</small>
-                                        <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
+                                        {% for service in chambre.services %}
+                                        <small> {{service.nomService}} </small> 
+                                        {% if not loop.last %}, {% endif %}  
+                                        {% endfor %}
+                                        
                                     </div>
                                     <p class="text-body mb-3">{{chambre.typeDeChambre.description}}</p>
                                     <div class="d-flex justify-content-between">
@@ -41,4 +45,4 @@
                 </div>
             </div>
         </div>
-        <!-- Room End -->
+<!-- Room End -->

@@ -44,10 +44,7 @@ class ServiceCrudController extends AbstractCrudController
                 'Climatiseur' => 'fas fa-snowflake',
                 'Chauffage d\'ambiance' => 'fas fa-temperature-high',
                 'Chauffage eau' => 'fas fa-hot-tub'
-                            
-                
-            
-                // Ajoutez d'autres icônes ici selon votre besoin
+      
             ]),
             
             

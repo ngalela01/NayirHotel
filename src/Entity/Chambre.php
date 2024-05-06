@@ -43,11 +43,7 @@ class Chambre
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 0)]
     private ?string $prix = null;
 
-    /**
-     * @var Collection<int, Service>
-     */
-    #[ORM\OneToMany(targetEntity: Service::class, mappedBy: 'chambre')]
-    private Collection $services;
+    
 
     #[ORM\Column(nullable: true)]
     private ?int $lits = null;
@@ -55,10 +51,17 @@ class Chambre
     #[ORM\Column(nullable: true)]
     private ?int $sallesDeBain = null;
 
+    /**
+     * @var Collection<int, Service>
+     */
+    #[ORM\ManyToMany(targetEntity: Service::class, inversedBy: 'chambres')]
+    private Collection $services;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
         $this->services = new ArrayCollection();
+        
     }
 
     public function getId(): ?int
@@ -175,35 +178,12 @@ class Chambre
         return $this;
     }
 
-    /**
-     * @return Collection<int, Service>
-     */
-    public function getServices(): Collection
-    {
-        return $this->services;
-    }
+    
 
-    public function addService(Service $service): static
-    {
-        if (!$this->services->contains($service)) {
-            $this->services->add($service);
-            $service->setChambre($this);
-        }
+    
 
-        return $this;
-    }
-
-    public function removeService(Service $service): static
-    {
-        if ($this->services->removeElement($service)) {
-            // set the owning side to null (unless already changed)
-            if ($service->getChambre() === $this) {
-                $service->setChambre(null);
-            }
-        }
-
-        return $this;
-    }
+    
+    
 
     public function getLits(): ?int
     {
@@ -225,6 +205,30 @@ class Chambre
     public function setSallesDeBain(?int $sallesDeBain): static
     {
         $this->sallesDeBain = $sallesDeBain;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Service>
+     */
+    public function getServices(): Collection
+    {
+        return $this->services;
+    }
+
+    public function addService(Service $service): static
+    {
+        if (!$this->services->contains($service)) {
+            $this->services->add($service);
+        }
+
+        return $this;
+    }
+
+    public function removeService(Service $service): static
+    {
+        $this->services->removeElement($service);
 
         return $this;
     }

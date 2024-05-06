@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ServiceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -16,8 +18,7 @@ class Service
 
     
 
-    #[ORM\ManyToOne(inversedBy: 'services')]
-    private ?Chambre $chambre = null;
+    
 
     #[ORM\Column(length: 255)]
     private ?string $nomService = null;
@@ -28,6 +29,17 @@ class Service
     #[ORM\Column(length: 255)]
     private ?string $icone = null;
 
+    /**
+     * @var Collection<int, Chambre>
+     */
+    #[ORM\ManyToMany(targetEntity: Chambre::class, mappedBy: 'services')]
+    private Collection $chambres;
+
+    public function __construct()
+    {
+        $this->chambres = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,17 +47,9 @@ class Service
 
    
 
-    public function getChambre(): ?Chambre
-    {
-        return $this->chambre;
-    }
+   
 
-    public function setChambre(?Chambre $chambre): static
-    {
-        $this->chambre = $chambre;
-
-        return $this;
-    }
+    
 
     public function getNomService(): ?string
     {
@@ -83,6 +87,33 @@ class Service
     public function setIcone(string $icone): static
     {
         $this->icone = $icone;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Chambre>
+     */
+    public function getChambres(): Collection
+    {
+        return $this->chambres;
+    }
+
+    public function addChambre(Chambre $chambre): static
+    {
+        if (!$this->chambres->contains($chambre)) {
+            $this->chambres->add($chambre);
+            $chambre->addService($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChambre(Chambre $chambre): static
+    {
+        if ($this->chambres->removeElement($chambre)) {
+            $chambre->removeService($this);
+        }
 
         return $this;
     }
