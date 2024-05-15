@@ -27,6 +27,12 @@ class Reservations
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $capaciteAdulte = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $capaciteEnfant = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,6 +82,30 @@ class Reservations
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getCapaciteAdulte(): ?int
+    {
+        return $this->capaciteAdulte;
+    }
+
+    public function setCapaciteAdulte(?int $capaciteAdulte): static
+    {
+        $this->capaciteAdulte = $capaciteAdulte;
+
+        return $this;
+    }
+
+    public function getCapaciteEnfant(): ?int
+    {
+        return $this->capaciteEnfant;
+    }
+
+    public function setCapaciteEnfant(?int $capaciteEnfant): static
+    {
+        $this->capaciteEnfant = $capaciteEnfant;
 
         return $this;
     }

@@ -25,57 +25,40 @@
                 <div class="row ">
                     <div class="col-12 col-lg-4">
                         <div class="form mb-5">
-                            <div class="form-group mb-4">
-                                <label for="DateArrivee">Date</label>
+                            {{ form_start(form) }}
+                                <div class="form-group mb-4">
                                     <div class="row g-0">
+                                        {{ form_label(form.dateArrivee,'Date Arrivée') }}
                                         <div class="col-6">
-                                            <input type="date" class="input-small form-control" id="DateArrivee" >
-                                        </div>
+                                            {{ form_widget(form.dateArrivee, {'attr': {'class': ' form-control-sm datepicker', 'placeholder': 'Date d\'arrivée'}}) }}                                        </div>
                                         <div class="col-6">
-                                            <input type="date" class="input-small form-control"  >
+                                            {{ form_widget(form.dateDepart, {'attr': {'class': ' form-control-sm datepicker', 'placeholder': 'Date de départ'}}) }}
                                         </div>
+                                        
+                                        
                                     </div>
-                            </div>
-                            <div class="form-group mb-4">
-                                <label for="invites">invitées</label>
-                                <div class="row g-0">
-                                    <div class="col-6">
-                                        <select name="adults" id="invites" class="form-select form-select-sm">
-                                            <option selected>Adultes</option>
-                                            <option value="01">01</option>
-                                            <option value="02">02</option>
-                                            <option value="03">03</option>
-                                            <option value="04">04</option>
-                                            <option value="05">05</option>
-                                            <option value="06">06</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-6">
-                                        <select name="enfants" id="enfants" class="form-select form-select-sm">
-                                            <option selected>Enfants</option>
-                                            <option value="01">01</option>
-                                            <option value="02">02</option>
-                                            <option value="03">03</option>
-                                            <option value="04">04</option>
-                                            <option value="05">05</option>
-                                            <option value="06">06</option>
-                                        </select>
-                                    </div>
+                                    
                                 </div>
-                            </div>
-
-                            <div class="form-group ">
-                                <label for="customRange1" class="form-label">Prix</label>
-                                <output id="priceOutput">0€</output>
-                                <input type="range" class="form-range" id="customRange1">
-                                
-                            </div>
-
-
-                            <div class="form-group">
+                                <div class="form-group mb-4">
+                                    <div class="row g-0">
+                                        {{ form_label(form.capaciteAdulte,'Invités') }}
+                                        <div class="col-6">
+                                             {{ form_widget(form.capaciteAdulte, {'attr': {'class': ' form-control-sm', 'placeholder': 'Nombre d\'adultes'}}) }}
+                                        </div>
+                                        <div class="col-6">
+                                            {{ form_widget(form.capaciteEnfant, {'attr': {'class': ' form-control-sm', 'placeholder': 'Nombre d\'enfants'}}) }}
+                                        </div>
+                                    
+                                    </div>
+ 
+                                </div>
+                                <div class="form-group">
                                 <button type="submit" class="btn btn-primary w-100">Rechercher</button>
+                                </div>
+                                
+                            {{ form_end(form) }}
                             </div>
-                        </div>
+                        
             
                     </div>
 
@@ -83,10 +66,10 @@
                         {% for chambre in chambres  %}
                             
                         
-                            <div class="room-item shadow-sm  rounded d-md-flex align-items-center mb-5 ">
+                            <div class="room-item shadow-sm  rounded d-md-flex align-items-center mb-3 ">
                                 <div class="position-relative">
                                 {% for image in chambre.images |slice(0, 1) %}
-                                    <img class="img-fluid"  src="{{ vich_uploader_asset(image,'imageFile') }}" alt="Image">
+                                    <img  class="img-fluid rounded"  src="{{ vich_uploader_asset(image,'imageFile') }}" alt="Image">
                                 {% endfor %}
                                 </div>
                                 <div class="p-4 mt-2">
@@ -101,7 +84,7 @@
                                     <div class="d-flex flex-wrap mb-3 mt-4">
                                         <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>2 lits</small>
                                         <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>3 Salle de bains</small>
-                                        <small> Services: wifi , television ... </small> 
+                                        <small> Services: {% for service in chambre.services %} {{service.nomService}}{% if not loop.last %}, {% endif %}{% endfor %}</small> 
                                         
                                         
                                     </div>

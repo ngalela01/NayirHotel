@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Chambre;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Form\SearchData;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Chambre>
@@ -45,4 +46,32 @@ class ChambreRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function findWithSearch(SearchData $searchData): iterable
+    {
+        $query = $this->createQueryBuilder('c');
+
+        // Construire la requête en fonction des critères de recherche
+         if ($searchData->getDateArrivee()) {
+             $query->andWhere('c.dateArrivee >= :dateArrivee');
+             $query->setParameter('dateArrivee', $searchData->getDateArrivee());
+         }
+         if ($searchData->getDateDepart()) {
+             $query->andWhere('c.dateDepart <= :dateDepart');
+             $query->setParameter('dateDepart', $searchData->getDateDepart());
+        }
+        if ($searchData->getCapaciteAdulte()) {
+            $query->andWhere('c.capaciteAdulte >= :capaciteAdulte');
+            $query->setParameter('capaciteAdulte', $searchData->getCapaciteAdulte());
+        }
+        if ($searchData->getCapaciteEnfant()) {
+            $query->andWhere('c.capaciteEnfant >= :capaciteEnfant');
+            $query->setParameter('capaciteEnfant', $searchData->getCapaciteEnfant());
+        }
+
+
+        // Exécuter la requête et retourner les résultats
+        return $query->getQuery()->getResult();
+    }
+    
 }
