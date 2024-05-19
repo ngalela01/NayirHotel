@@ -7,29 +7,22 @@
                         {{ form_start(form) }}
                             <div class="row d-flex align-items-end">
                                 <div class="col-md-3 mb-3">
-                                    {{ form_label(form.dateArrivee,'Date d\'arrivée',{'attr':{'class':'form-label'}}) }}
-                                    {# <label class="form-label" style="font-weight:500,">Date d'arrivée</label> #}
-                                    {{ form_widget(form.dateArrivee,{'attr':{'class':' form-control-sm datepicker', 'placeholder': 'dd- mm- yyyy'}}) }}
+                                    {{ form_widget(form.dateArrivee,{'attr':{'class':' form-control datepicker', 'placeholder': 'dd- mm- yyyy'}}) }}
                                     
                                 </div>
                                 <div class="col-md-3 mb-3">
-                                    {{ form_label(form.dateDepart,'Date de départ',{'attr':{'class':'form-label'}}) }}
-                                    {{ form_widget(form.dateDepart,{'attr':{'class':' form-control-sm datepicker', 'placeholder': 'dd- mm- yyyy'}}) }}
-
+                                    {{ form_widget(form.dateDepart,{'attr':{'class':' form-control datepicker', 'placeholder': 'dd- mm- yyyy'}}) }}
                                 </div>
 
                                 <div class="col-md-2 mb-3">
-                                    {# <label class="form-label" style="font-weight:500,">Adultes</label> #}
-                                    {{ form_label(form.capaciteAdulte, 'Adultes') }}
-                                    {{ form_widget(form.capaciteAdulte, {'attr': {'class': ' form-control-sm', 'placeholder': 'Nombre d\'adultes'}}) }}
+                                    {{ form_widget(form.capaciteAdulte, {'attr': {'class': ' form-control', 'placeholder': 'Adultes'}}) }}
                                 </div>
 
                                 <div class="col-md-2 mb-3">
-                                    {{ form_label(form.capaciteEnfant, 'Enfants') }}
-                                    {{ form_widget(form.capaciteEnfant, {'attr': {'class': ' form-control-sm', 'placeholder': 'Nombre d\'enfants'}}) }}
+                                    {{ form_widget(form.capaciteEnfant, {'attr': {'class': ' form-control', 'placeholder': 'Enfants'}}) }}
                                 </div>
                                 <div class="col-md-2 mb-3">
-                                    <button class="btn btn-primary btn-sm w-100 rounded">Rechercher</button>
+                                    <button class="btn btn-primary  w-100 rounded">Rechercher</button>
                                 </div>
                             </div>
                         {{ form_end(form) }}
