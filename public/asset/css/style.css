@@ -148,6 +148,7 @@
     color: var(--light);
 }
 
+
 .booking {
     position: relative;
     margin-top: -100px !important;
@@ -316,9 +317,108 @@
 }
 
 
+    .single-room-area .room-thumbnail {
+        position: relative;
+        z-index: 1;
+        flex: 0 0 50%;
+        max-width: 50%;
+        width: 50%;
+    }
+    @media only screen and (max-width: 767px) {
+        .single-room-area .room-thumbnail {
+            max-width: 100%;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+    }
+
+/***fin page des chambres***/
 
 
-/***page des chambres***/
+/***debut page détail des chambres ***/
+
+/* Styles pour les images du carrousel */
+.carousel-inner .carousel-item img {
+    width: 100%;
+    height: 350px; /* Hauteur fixe pour les images */
+    object-fit: cover; /* Les images remplissent le conteneur sans se déformer */
+}
+
+/* Positionner les indicateurs en bas du carrousel */
+.carousel-indicators {
+    position: relative;
+    z-index: 1;
+    bottom: -20px; /* Ajustez cette valeur pour positionner les indicateurs plus ou moins haut */
+    gap: 10px; /* Espacement entre les indicateurs */
+}
+
+.carousel-indicators li  {
+    width: 120px !important;
+      height: 70px !important; /* Augmentez la hauteur pour rendre les images plus grandes */
+    object-fit: cover; /* Les images remplissent le conteneur sans se déformer */
+}
+
+/* Media query pour ajuster la hauteur sur les petits écrans */
+@media (max-width: 767px) {
+    .carousel-inner .carousel-item img {
+        height: 200px; /* Réduit la hauteur relative sur les petits écrans */
+    }
+}
+
+/* room features */
+.room-features-area {
+    position: relative;
+    z-index: 1; 
+}
+.room-features-area h6 {
+    max-width:15%; /* Largeur maximale de 25% du conteneur parent */
+    width: 15%; /* Largeur fixe de 25% du conteneur parent */
+    padding: 20px 15px;
+    border-left: 1px solid #ebebeb;
+    border-top: 1px solid #ebebeb;
+    border-bottom: 1px solid #ebebeb;
+    text-align: center;
+    color: #afb4bf;
+    margin-bottom: 0; 
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    /* Pour les écrans dont la largeur est comprise entre 992px et 1199px */
+    .room-features-area h6 {
+        font-size: 14px;
+     } 
+}
+@media only screen and (max-width: 767px) {
+.room-features-area h6 {
+    max-width: 50%;
+    width: 50%;
+    font-size: 13px;
+    padding: 20px 10px; } }
+.room-features-area h6 span {
+display: block;
+color: #2a303b; }
+.room-features-area h6:last-child {
+border-right: 1px solid #ebebeb; }
+/* room features */ 
+
+
+.nayir-contact {
+    position: relative;
+    z-index: 1; }
+    .nayir-contact .contact-content {
+      padding-top: 50px;
+      padding-left: 50px;
+      padding-right: 20px; }
+    .nayir-contact .contact-text h2 {
+      color: #ffffff;
+      font-size: 36px;
+      margin-bottom: 10px; }
+    .nayir-contact .contact-text h6 {
+      margin-bottom: 0;
+      color: #ffffff; }
+
+
+/***fin page détail des chambres ***/
+
 
 
 /*** Footer ***/
@@ -396,3 +496,11 @@
     padding-right: 0;
     border-right: none;
 }
+
+
+
+
+
+
+
+

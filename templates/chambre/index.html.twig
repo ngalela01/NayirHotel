@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Chambre index{% endblock %}
+{% block title %}Liste des chambres{% endblock %}
 
 {% block body %}
     <!-- Page Header Start -->
@@ -66,10 +66,10 @@
                         {% for chambre in chambres  %}
                             
                         
-                            <div class="room-item shadow-sm  rounded d-md-flex align-items-center mb-3 ">
-                                <div class="position-relative">
+                            <div class="single-room-area shadow-sm  rounded d-md-flex align-items-center mb-3 ">
+                                <div class="room-thumbnail">
                                 {% for image in chambre.images |slice(0, 1) %}
-                                    <img  class="img-fluid rounded"  src="{{ vich_uploader_asset(image,'imageFile') }}" alt="Image">
+                                    <img  class="img-fluid rounded w-100 "  src="{{ vich_uploader_asset(image,'imageFile') }}" alt="Image">
                                 {% endfor %}
                                 </div>
                                 <div class="p-4 mt-2">
@@ -90,7 +90,7 @@
                                     </div>
                                     <p class="text-body mb-3">{{chambre.typeDeChambre.description}} </p>
                                     <div class="d-flex justify-content-between">
-                                        <a class="btn btn-sm btn-primary rounded py-2 px-4" href="">Voir détail</a>
+                                        <a class="btn btn-sm btn-primary rounded py-2 px-4" href={{ path('app_chambre_show',{'id':chambre.id}) }}>Voir détail</a>
                                         <a class="btn btn-sm btn-dark rounded py-2 px-4" href="">Réserver</a>
                                     </div>
                                 </div>

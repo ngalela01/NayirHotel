@@ -57,10 +57,17 @@ class Chambre
     #[ORM\ManyToMany(targetEntity: Service::class, inversedBy: 'chambres')]
     private Collection $services;
 
+    /**
+     * @var Collection<int, Commentaire>
+     */
+    #[ORM\OneToMany(targetEntity: Commentaire::class, mappedBy: 'chambre', orphanRemoval: true)]
+    private Collection $commentaires;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
         $this->services = new ArrayCollection();
+        $this->commentaires = new ArrayCollection();
         
     }
 
@@ -229,6 +236,36 @@ class Chambre
     public function removeService(Service $service): static
     {
         $this->services->removeElement($service);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commentaire>
+     */
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
+    }
+
+    public function addCommentaire(Commentaire $commentaire): static
+    {
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires->add($commentaire);
+            $commentaire->setChambre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(Commentaire $commentaire): static
+    {
+        if ($this->commentaires->removeElement($commentaire)) {
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getChambre() === $this) {
+                $commentaire->setChambre(null);
+            }
+        }
 
         return $this;
     }
