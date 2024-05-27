@@ -14,8 +14,7 @@ class Commentaire
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $auteur = null;
+    
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $contenu = null;
@@ -30,22 +29,16 @@ class Commentaire
     #[ORM\JoinColumn(nullable: false)]
     private ?Chambre $chambre = null;
 
+    #[ORM\ManyToOne(inversedBy: 'commentaire')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getAuteur(): ?string
-    {
-        return $this->auteur;
-    }
 
-    public function setAuteur(string $auteur): static
-    {
-        $this->auteur = $auteur;
-
-        return $this;
-    }
 
     public function getContenu(): ?string
     {
@@ -91,6 +84,18 @@ class Commentaire
     public function setChambre(?Chambre $chambre): static
     {
         $this->chambre = $chambre;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }

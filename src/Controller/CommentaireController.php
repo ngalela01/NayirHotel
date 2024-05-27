@@ -2,14 +2,18 @@
 
 namespace App\Controller;
 
+use App\Entity\Chambre;
 use App\Entity\Commentaire;
 use App\Form\CommentaireType;
-use App\Repository\CommentaireRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\CommentaireRepository;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/commentaire')]
 class CommentaireController extends AbstractController
@@ -21,19 +25,26 @@ class CommentaireController extends AbstractController
             'commentaires' => $commentaireRepository->findAll(),
         ]);
     }
-
-    #[Route('/new', name: 'app_commentaire_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    
+    #[Route('/new/{chambreId}', name: 'app_commentaire_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager, Security $security,$chambreId): Response
     {
+        $chambre = $entityManager->getRepository(Chambre::class)->find($chambreId); //recupere l'id de la chambre concerné
         $commentaire = new Commentaire();
         $form = $this->createForm(CommentaireType::class, $commentaire);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+             // Récupérer l'utilisateur authentifié
+            $user = $this->getUser();
+            $commentaire->setUser($user);
+            $commentaire->setDate(new \DateTime('now'));
+            $commentaire->setChambre($chambre);
             $entityManager->persist($commentaire);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_commentaire_index', [], Response::HTTP_SEE_OTHER);
+            // Rediriger vers la page de détail de la chambre avec l'ID de la chambre
+            return new RedirectResponse($this->generateUrl('app_chambre_show', ['id' => $chambreId]));
         }
 
         return $this->render('commentaire/new.html.twig', [
