@@ -63,6 +63,9 @@ class Chambre
     #[ORM\OneToMany(targetEntity: Commentaire::class, mappedBy: 'chambre', orphanRemoval: true)]
     private Collection $commentaires;
 
+    
+    private ?float $noteMoyenne = null;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -266,6 +269,18 @@ class Chambre
                 $commentaire->setChambre(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNoteMoyenne(): ?float
+    {
+        return $this->noteMoyenne;
+    }
+
+    public function setNoteMoyenne(?float $noteMoyenne): static
+    {
+        $this->noteMoyenne = $noteMoyenne;
 
         return $this;
     }

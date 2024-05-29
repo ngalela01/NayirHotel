@@ -74,7 +74,22 @@ class ChambreRepository extends ServiceEntityRepository
         return $query->getQuery()->getResult();
     }
 
-
+    
+// calcul moyenne note des chambres
+    public function findAverageRatingByChambreId(int $chambreId):?float
+    {
+        $qb = $this->createQueryBuilder('c')  
+            ->leftJoin('c.commentaires', 'com') // Joignez les commentaires associés à la chambre via la relation 'commentaire'
+            ->select('AVG(com.note)') // la fonction AVG() pour calculer la moyenne des notes des commentaires
+            ->where('c.id = :chambreId') //  condition WHERE pour filtrer uniquement la chambre spécifiée
+            ->setParameter('chambreId', $chambreId) // Définissez le paramètre pour l'ID de la chambre
+            // Exécutez la requête et obtenez le résultat unique (la note moyenne)
+            ->getQuery()
+            ->getSingleScalarResult();
+            
+        // Vérifiez si le résultat n'est pas null (ce qui signifie qu'aucun commentaire n'a été trouvé)
+        return $qb!== null? $qb : null;
+    }
     
     
 }

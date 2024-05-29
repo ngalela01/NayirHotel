@@ -19,7 +19,16 @@ class AcceuilController extends AbstractController
     {   // Récupérer tous les services depuis la base de données
         $services = $serviceRepo->findAll();
         $chambres= $chambreRepo->findAll();
+        
+        //Calcul de la note moyenne de chaque chambre
+        foreach ($chambres as &$chambre) {
+            $averageRating = $chambreRepo->findAverageRatingByChambreId($chambre->getId());
+            $chambre->setNoteMoyenne($averageRating);
+        }
+        
+        
 
+        // Gestion du formulaire de recherche
         $search= new SearchData() ; 
         $form=$this->createForm(SearchType::class, $search);
         
