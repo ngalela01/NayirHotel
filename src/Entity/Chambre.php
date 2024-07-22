@@ -66,11 +66,18 @@ class Chambre
     
     private ?float $noteMoyenne = null;
 
+    /**
+     * @var Collection<int, Reservations>
+     */
+    #[ORM\OneToMany(targetEntity: Reservations::class, mappedBy: 'chambre', orphanRemoval: true)]
+    private Collection $reservations;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
         $this->services = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
+        $this->reservations = new ArrayCollection();
         
     }
 
@@ -281,6 +288,36 @@ class Chambre
     public function setNoteMoyenne(?float $noteMoyenne): static
     {
         $this->noteMoyenne = $noteMoyenne;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reservations>
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservations $reservation): static
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations->add($reservation);
+            $reservation->setChambre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservations $reservation): static
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getChambre() === $this) {
+                $reservation->setChambre(null);
+            }
+        }
 
         return $this;
     }

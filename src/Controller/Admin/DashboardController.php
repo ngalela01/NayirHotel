@@ -5,8 +5,9 @@ namespace App\Controller\Admin;
 use App\Entity\User;
 use App\Entity\Images;
 use App\Entity\Chambre;
-use App\Entity\Commentaire;
 use App\Entity\Service;
+use App\Entity\Commentaire;
+use App\Entity\Reservations;
 use App\Entity\TypeDeChambre;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -45,6 +46,7 @@ class DashboardController extends AbstractDashboardController
          yield MenuItem::linkToCrud('Sevices', 'fas fa-table-list', Service::class);
          yield MenuItem::linkToCrud('Images', 'fas fa-image', Images::class);
          yield MenuItem::linkToCrud('Commentaires des chambres', 'fas fa-comment', Commentaire::class);
+         yield MenuItem::linkToCrud('Les réservarations', 'fas fa-comment', Reservations::class);
     }
     
 }

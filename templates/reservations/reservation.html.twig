@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation{% endblock %}
+
+{% block body %}
+    
+<!-- Page Header Start -->
+        <div class="container-fluid page-header mb-5 p-0" style="background-image: url(/asset/img/carousel-1.jpg);">
+            <div class="container-fluid page-header-inner py-5">
+                <div class="container text-center pb-5">
+                    <h1 class="display-3 text-white mb-3 animated slideInDown">Reservation</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center text-uppercase">
+                            <li class="breadcrumb-item"><a href={{path('app_acceuil')}}>Acceuil</a></li>
+                            <li class="breadcrumb-item"><a href={{path('app_acceuil')}}>Chambre</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">Reservation</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+<!-- Page Header End -->
+
+
+
+<!-- About Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                    <div class="row g-5 align-items-center">
+                        <div class="text-center " >
+                        <h6 class="section-title text-center text-primary text-uppercase">RÉSERVATION DE CHAMBRE</h6>
+                        <h1 class="mb-5">Réserver une <span class="text-primary text-uppercase"> CHAMBRE DE LUXE</span></h1>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="row g-3">
+                            <div class="col-6 text-end">
+                                <img class="img-fluid rounded w-75 "  src={{ asset('asset/img/about-1.jpg') }} style="margin-top: 25%;">
+                                
+                            </div>
+                            <div class="col-6 text-start">
+                                <img class="img-fluid rounded w-100 " src={{ asset('asset/img/about-2.jpg') }}>
+                            </div>
+                            <div class="col-6 text-end">
+                                <img class="img-fluid rounded w-50 "  src={{ asset('asset/img/about-3.jpg') }}>
+                            </div>
+                            <div class="col-6 text-start">
+                                <img class="img-fluid rounded w-75 "  src={{ asset('asset/img/about-4.jpg')}}>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                    {{ form_start(form) }}
+                        <div class="row g-3">
+                            
+                        </div>
+                    {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+   
+
+{% endblock %}
+
+
