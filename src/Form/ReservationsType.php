@@ -27,10 +27,10 @@ class ReservationsType extends AbstractType
             ->add('capaciteAdulte')
             ->add('capaciteEnfant')
             ->add('email')
-            ->add('chambre', EntityType::class, [
-                'class' => Chambre::class,
-                'choice_label' => 'numero',
-            ]);
+            // ->add('chambre', EntityType::class, [
+            //     'class' => Chambre::class,
+            //     'choice_label' => 'numero',
+            // ]);
             
             
             
