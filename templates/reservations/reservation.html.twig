@@ -33,19 +33,21 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="row g-3">
-                            <div class="col-6 text-end">
-                                <img class="img-fluid rounded w-75 "  src={{ asset('asset/img/about-1.jpg') }} style="margin-top: 25%;">
-                                
-                            </div>
-                            <div class="col-6 text-start">
-                                <img class="img-fluid rounded w-100 " src={{ asset('asset/img/about-2.jpg') }}>
-                            </div>
-                            <div class="col-6 text-end">
-                                <img class="img-fluid rounded w-50 "  src={{ asset('asset/img/about-3.jpg') }}>
-                            </div>
-                            <div class="col-6 text-start">
-                                <img class="img-fluid rounded w-75 "  src={{ asset('asset/img/about-4.jpg')}}>
-                            </div>
+                            {% for image in chambre.images %}
+                                {% if loop.index == 1 %}
+                                    <div class="col-6 text-end">
+                                        <img class="img-fluid rounded w-75" src="{{ vich_uploader_asset(image, 'imageFile') }}" style="margin-top: 25%;">
+                                    </div>
+                                {% elseif loop.index == 2 %}
+                                    <div class="col-6 text-start">
+                                        <img class="img-fluid rounded w-100" src="{{ vich_uploader_asset(image, 'imageFile') }}">
+                                    </div>
+                                {% elseif loop.index == 3 %}
+                                    <div class="col-10 text-end">
+                                        <img class="img-fluid rounded w-50" src="{{ vich_uploader_asset(image, 'imageFile') }}" >
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
                         </div>
                     </div>
                     <div class="col-lg-6">

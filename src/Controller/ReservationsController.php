@@ -59,10 +59,25 @@ class ReservationsController extends AbstractController
         return $this->render('reservations/reservation.html.twig', [
             'reservation' => $reservation,
             'form' => $form,
+            'chambre' => $chambre, 
         ]);
     }
 
+    #[Route('/mes-reservations', name: 'app_reservations_mes_reservations', methods: ['GET'])]
+    public function mesReservations(EntityManagerInterface $entityManager, Security $security): Response
+    {   
+        $user = $security->getUser();
 
+        if (!$user) {
+        throw $this->createAccessDeniedException('Vous devez être connecté pour voir vos réservations.');
+        }
+        
+        $reservations = $entityManager->getRepository(Reservations::class)->findBy(['user' => $user]);
+
+        return $this->render('reservations/mes_reservations.html.twig', [
+            'reservations' => $reservations,
+        ]);
+    }
    
 
     
