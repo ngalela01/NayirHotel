@@ -11,19 +11,19 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    
                     <th>Chambre</th>
                     <th>Date d'arrivée</th>
                     <th>Date de départ</th>
                     <th>Nombre d'adultes</th>
                     <th>Nombre d'enfants</th>
-                    <th>Actions</th>
+                    
                 </tr>
             </thead>
             <tbody>
                 {% for reservation in reservations %}
                     <tr>
-                        <td>{{ reservation.id }}</td>
+                        
                         <td>{{ reservation.chambre.typeDeChambre.nom }}</td>
                         <td>{{ reservation.dateArrive ? reservation.dateArrive|date('d/m/Y') : 'N/A' }}</td>
                         <td>{{ reservation.dateDepart ? reservation.dateDepart|date('d/m/Y') : 'N/A' }}</td>
