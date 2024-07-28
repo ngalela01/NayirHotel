@@ -22,57 +22,37 @@ class ChambreRepository extends ServiceEntityRepository
         parent::__construct($registry, Chambre::class);
     }
 
-    //    /**
-    //     * @return Chambre[] Returns an array of Chambre objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('c.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Chambre
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
 
     public function findWithSearch(SearchData $searchData): iterable
-    {
-        $query = $this->createQueryBuilder('c');
+{
+    $query = $this->createQueryBuilder('c')
+        ->leftJoin('c.reservations', 'r')
+        ->addSelect('r');
 
-        // Construire la requête en fonction des critères de recherche
-         if ($searchData->getDateArrivee()) {
-             $query->andWhere('c.dateArrivee >= :dateArrivee');
-             $query->setParameter('dateArrivee', $searchData->getDateArrivee());
-         }
-         if ($searchData->getDateDepart()) {
-             $query->andWhere('c.dateDepart <= :dateDepart');
-             $query->setParameter('dateDepart', $searchData->getDateDepart());
-        }
-        if ($searchData->getCapaciteAdulte()) {
-            $query->andWhere('c.capaciteAdulte >= :capaciteAdulte');
-            $query->setParameter('capaciteAdulte', $searchData->getCapaciteAdulte());
-        }
-        if ($searchData->getCapaciteEnfant()) {
-            $query->andWhere('c.capaciteEnfant >= :capaciteEnfant');
-            $query->setParameter('capaciteEnfant', $searchData->getCapaciteEnfant());
-        }
+    // Formatage des dates en 'Y-m-d' pour MySQL
+    if ($searchData->getDateArrivee() && $searchData->getDateDepart()) {
+        $dateArrivee = \DateTime::createFromFormat('d-m-Y', $searchData->getDateArrivee());
+        $dateDepart = \DateTime::createFromFormat('d-m-Y', $searchData->getDateDepart());
 
-
-        // Exécuter la requête et retourner les résultats
-        return $query->getQuery()->getResult();
+        if ($dateArrivee && $dateDepart) {
+            $query->andWhere('r.dateArrive IS NULL OR r.dateDepart IS NULL OR (r.dateDepart < :dateArrivee OR r.dateArrive > :dateDepart)')
+                ->setParameter('dateArrivee', $dateArrivee->format('Y-m-d'))
+                ->setParameter('dateDepart', $dateDepart->format('Y-m-d'));
+        }
     }
+
+    if ($searchData->getCapaciteAdulte()) {
+        $query->andWhere('c.capaciteAdulte >= :capaciteAdulte')
+            ->setParameter('capaciteAdulte', $searchData->getCapaciteAdulte());
+    }
+
+    if ($searchData->getCapaciteEnfant()) {
+        $query->andWhere('c.capaciteEnfant >= :capaciteEnfant')
+            ->setParameter('capaciteEnfant', $searchData->getCapaciteEnfant());
+    }
+
+    return $query->getQuery()->getResult();
+}
 
     
 // calcul moyenne note des chambres

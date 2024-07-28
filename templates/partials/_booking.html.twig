@@ -7,19 +7,19 @@
                         {{ form_start(form) }}
                             <div class="row d-flex align-items-end">
                                 <div class="col-md-3 mb-3">
-                                    {{ form_widget(form.dateArrivee,{'attr':{'class':' form-control datepicker', 'placeholder': 'dd- mm- yyyy'}}) }}
+                                    {{ form_widget(form.dateArrivee,{'attr':{'class':' form-control datepicker p-2', 'placeholder': 'Date Arrivée'}}) }}
                                     
                                 </div>
                                 <div class="col-md-3 mb-3">
-                                    {{ form_widget(form.dateDepart,{'attr':{'class':' form-control datepicker', 'placeholder': 'dd- mm- yyyy'}}) }}
+                                    {{ form_widget(form.dateDepart,{'attr':{'class':' form-control datepicker p-2', 'placeholder': 'Date Départ'}}) }}
                                 </div>
 
                                 <div class="col-md-2 mb-3">
-                                    {{ form_widget(form.capaciteAdulte, {'attr': {'class': ' form-control', 'placeholder': 'Adultes'}}) }}
+                                    {{ form_widget(form.capaciteAdulte, {'attr': {'class': ' form-control p-2', 'placeholder': 'Adultes'}}) }}
                                 </div>
 
                                 <div class="col-md-2 mb-3">
-                                    {{ form_widget(form.capaciteEnfant, {'attr': {'class': ' form-control', 'placeholder': 'Enfants'}}) }}
+                                    {{ form_widget(form.capaciteEnfant, {'attr': {'class': ' form-control p-2', 'placeholder': 'Enfants'}}) }}
                                 </div>
                                 <div class="col-md-2 mb-3">
                                     <button class="btn btn-primary  w-100 rounded">Rechercher</button>

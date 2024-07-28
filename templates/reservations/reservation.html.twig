@@ -49,6 +49,14 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
+                    {% for label, messages in app.flashes %}
+                    <div class="alert alert-{{ label }}">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+
                     {{ form_start(form) }}
                         <div class="row g-3">
                             <div class="col-md-6">
@@ -61,16 +69,19 @@
                                 {{ form_widget(form.email, {'attr':{'class':'form-control p-2', 'placeholder': 'Votre adresse mail'}}) }}
                             </div>
                             <div class="col-md-6">
-                                {{ form_widget(form.dateArrive,{'attr':{'class':' form-control datepicker p-2', 'placeholder': 'dd- mm- yyyy'}}) }}                            </div>
+                                {{ form_widget(form.dateArrive,{'attr':{'class':' form-control datepicker p-2', 'placeholder': 'Date arrivée'}}) }}                            
+                                {{ form_errors(form.dateArrive) }}
+                            </div>
                             <div class="col-md-6">
-                                {{ form_widget(form.dateDepart,{'attr':{'class':' form-control datepicker p-2', 'placeholder': 'dd- mm- yyyy'}}) }}
+                                {{ form_widget(form.dateDepart,{'attr':{'class':' form-control datepicker p-2', 'placeholder': 'Date Départ'}}) }}
+                            {{ form_errors(form.dateDepart) }}
                             </div>
                             <div class="col-md-6 mb-3">
                                     {{ form_widget(form.capaciteAdulte, {'attr': {'class': ' form-control p-2', 'placeholder': 'Adultes'}}) }}
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                {{ form_widget(form.capaciteEnfant, {'attr': {'class': ' form-control p-2', 'placeholder': 'Enfants'}}) }}
+                                {{ form_widget(form.capaciteEnfant, {'attr': {'class': ' form-control p-2', 'placeholder': 'Enfants'  }}) }}
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">

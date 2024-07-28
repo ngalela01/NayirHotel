@@ -12,11 +12,12 @@ use Symfony\Component\Validator\Constraints as Assert; // Importation de l'espac
 class SearchType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
+    {   $today = new \DateTime(); // Obtenir la date d'aujourd'hui
+        
         $builder
          ->add('dateArrivee')
          ->add('dateDepart')
-        ->add('capaciteAdulte', IntegerType::class, [
+         ->add('capaciteAdulte', IntegerType::class, [
             'required' => false, // Définir le champ comme facultatif
             'constraints' => [
                 new Assert\Positive(),
@@ -25,10 +26,10 @@ class SearchType extends AbstractType
                 'min' => 0, // Définit la valeur minimale
             ],
             
-        ])
+        ]) 
         
         ->add('capaciteEnfant', IntegerType::class, [
-            'required' => false, // Définir le champ comme facultatif
+            'required' => false, 
             'constraints' => [
                 new Assert\Positive(),
             ],
