@@ -23,12 +23,19 @@
                                 <a href="{{ path('app_reservations_mes_reservations') }}" class="nav-item nav-link">Mes reservations</a>
                                 <a href={{path('app_chambre_index')}} class="nav-item nav-link">Chambres</a>
                                 <a href={{path('app_contact')}} class="nav-item nav-link">Contact</a>
+
+                                 {% if is_granted('ROLE_ADMIN') %} {#autorise l'acces seulement à l'admin #}
                                 <a href={{ path('admin') }} class="nav-item nav-link">Admin</a>
+                                {% endif %}
                             </div>
                             <!-- Conteneur pour les boutons de connexion et de déconnexion -->
                             <div class="navbar-nav ml-auto py-0 ">
-                                <a class='btn btn-primary me-2' href={{ path('app_login') }}>Connexion</a>
-                                <a class='btn btn-secondary me-2 d-none d-lg-block' href={{ path('app_register') }}>Inscription</a>
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                    <a class='btn btn-danger me-2' href={{ path('app_logout') }}>Déconnexion</a>
+                                {% else %}
+                                    <a class='btn btn-secondary me-2 d-none d-lg-block' href={{ path('app_register') }}>Inscription</a>
+                                    <a class='btn btn-primary me-2' href={{ path('app_login') }}>Connexion</a>
+                                {% endif %}
                             </div>
                             
                         </div>
