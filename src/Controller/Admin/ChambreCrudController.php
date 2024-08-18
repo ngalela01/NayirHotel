@@ -38,12 +38,6 @@ class ChambreCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Chambre')
             ->setEntityLabelInPlural('Chambres');
     }
-
-
-    
-    
-    
-
     public function configureFields(string $pageName): iterable
     {
         return [

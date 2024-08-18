@@ -3,12 +3,12 @@
 {% block title %}Mes Réservations{% endblock %}
 
 {% block body %}
-    <h1>Mes Réservations</h1>
+    <h1 class="text-center m-3">Mes Réservations</h1>
 
     {% if reservations is empty %}
         <p>Vous n'avez aucune réservation.</p>
     {% else %}
-        <table class="table">
+        <table class="table table-primary border-dark w-75 mx-auto">
             <thead>
                 <tr>
                     

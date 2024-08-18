@@ -20,7 +20,7 @@ class SearchType extends AbstractType
          ->add('capaciteAdulte', IntegerType::class, [
             'required' => false, // Définir le champ comme facultatif
             'constraints' => [
-                new Assert\Positive(),
+                new Assert\PositiveOrZero(),
             ],
             'attr' => [
                 'min' => 0, // Définit la valeur minimale
@@ -31,7 +31,7 @@ class SearchType extends AbstractType
         ->add('capaciteEnfant', IntegerType::class, [
             'required' => false, 
             'constraints' => [
-                new Assert\Positive(),
+                new Assert\PositiveOrZero(),
             ],
             'attr' => [
                 'min' => 0, 

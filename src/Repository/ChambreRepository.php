@@ -60,7 +60,7 @@ class ChambreRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('c')  
             ->leftJoin('c.commentaires', 'com') // Joignez les commentaires associés à la chambre via la relation 'commentaire'
-            ->select('AVG(com.note)') // la fonction AVG() pour calculer la moyenne des notes des commentaires
+            ->select('AVG(com.note)') // la fonction AVG() pour calculer la moyenne des notes
             ->where('c.id = :chambreId') //  condition WHERE pour filtrer uniquement la chambre spécifiée
             ->setParameter('chambreId', $chambreId) // Définissez le paramètre pour l'ID de la chambre
             // Exécutez la requête et obtenez le résultat unique (la note moyenne)

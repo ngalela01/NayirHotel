@@ -18,6 +18,7 @@ class AcceuilController extends AbstractController
     public function index(ChambreRepository $chambreRepo, ServiceRepository $serviceRepo,Request $request): Response
     {   // Récupérer tous les services depuis la base de données
         $services = $serviceRepo->findAll();
+        // Récupérer tous les chambres depuis la base de données
         $chambres= $chambreRepo->findAll();
         
         //Calcul de la note moyenne de chaque chambre

@@ -315,6 +315,12 @@
 .primary{
     color: var(--primary);
 }
+.room-item {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
 
 
     .single-room-area .room-thumbnail {

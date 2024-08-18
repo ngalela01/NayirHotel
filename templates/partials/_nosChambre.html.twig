@@ -9,7 +9,7 @@
 
                     {% for chambre in chambres|slice(0, 3) %}
                         <div class="col-lg-4 col-md-6 " >
-                            <div class="room-item shadow rounded overflow-hidden">
+                            <div class="room-item shadow rounded overflow-hidden ">
                                 <div class="position-relative">
                                 {% for image in chambre.images|slice(0, 1) %}
                                     <img class="img-fluid"  src="{{ vich_uploader_asset(image,'imageFile') }}" alt="Image">
@@ -20,11 +20,11 @@
                                     <div class="d-flex justify-content-between mb-3">
                                         <h5 class="mb-0">{{chambre.typeDeChambre.nom}}</h5>
                                         <div class="ps-2">
-                                            {% set averageNote = chambre.noteMoyenne %}
+                                            {% set Note = chambre.noteMoyenne %}
                                                 {% for i in 1..5 %}
-                                                    {% if i <= averageNote %}
+                                                    {% if i <= Note %}
                                                         <i class="bi bi-star-fill text-primary"></i> {# Étoile pleine #}
-                                                    {% elseif i <= averageNote + 0.5 %}
+                                                    {% elseif i <= Note + 0.5 %}
                                                         <i class="bi bi-star-half text-primary"></i> {# Demi-étoile #}
                                                     {% else %}
                                                         <i class="bi bi-star text-primary"></i> {# Étoile vide #}
@@ -41,8 +41,8 @@
                                         {% endfor %}
                                         
                                     </div>
-                                    <p class="text-body mb-3">{{chambre.typeDeChambre.description}}</p>
-                                    <div class="d-flex justify-content-between">
+                                    <p class="text-body mb-3 ">{{chambre.typeDeChambre.description}}</p>
+                                    <div class="mt-auto d-flex justify-content-between">
                                         <a class="btn btn-sm btn-primary rounded py-2 px-4" href={{ path('app_chambre_show',{'id':chambre.id}) }}>Voir détail</a>
                                         <a class="btn btn-sm btn-dark rounded py-2 px-4" href="">Réserver</a>
                                     </div>
@@ -54,3 +54,7 @@
             </div>
         </div>
 <!-- Room End -->
+
+
+
+

@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ReservationsType extends AbstractType
 {
@@ -68,10 +69,10 @@ class ReservationsType extends AbstractType
                 
             ])
             ->add('email')
-            // ->add('chambre', EntityType::class, [
-            //     'class' => Chambre::class,
-            //     'choice_label' => 'numero',
-            // ]);
+            ->add('demandeSpeciale', TextareaType::class, [
+                'required' => false,
+            
+            ]);
             
             
             

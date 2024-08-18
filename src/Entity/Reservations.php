@@ -48,6 +48,9 @@ class Reservations
     #[ORM\JoinColumn(nullable: false)]
     private ?Chambre $chambre = null;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $demandeSpeciale = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -181,6 +184,18 @@ class Reservations
     public function setChambre(?Chambre $chambre): static
     {
         $this->chambre = $chambre;
+
+        return $this;
+    }
+
+    public function getDemandeSpeciale(): ?string
+    {
+        return $this->demandeSpeciale;
+    }
+
+    public function setDemandeSpeciale(?string $demandeSpeciale): static
+    {
+        $this->demandeSpeciale = $demandeSpeciale;
 
         return $this;
     }

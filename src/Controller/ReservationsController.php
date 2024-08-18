@@ -71,7 +71,8 @@ class ReservationsController extends AbstractController
                         ->from($reservation->getEmail())
                         ->to('admin@test.fr')
                         ->subject('Nouvelle réservation effectuée')
-                        ->html('<p>Une nouvelle réservation a été effectuée. Veuillez la confirmer dans le système de gestion des réservations.</p>');
+                        ->html('<p>Une nouvelle réservation a été effectuée. Veuillez la confirmer dans le système de gestion des réservations.</p>
+                                <p><strong>Demande spéciale:</strong> ' . $reservation->getDemandeSpeciale() . '</p>');
 
                     $mailer->send($email);
                 } catch (\Exception $e){ // Code pour gérer l'exception
