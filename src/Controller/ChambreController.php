@@ -17,6 +17,7 @@ class ChambreController extends AbstractController
     #[Route('/', name: 'app_chambre_index', methods: ['GET','POST'])]
     public function index(ChambreRepository $chambreRepository, Request $request): Response
     {  
+        
         // Création d'une nouvelle instance de SearchData pour stocker les critères de recherche
     $search = new SearchData();
     
@@ -59,6 +60,13 @@ class ChambreController extends AbstractController
         // Si aucun critère de recherche n'est trouvé dans l'URL, récupération de toutes les chambres
         $chambres = $chambreRepository->findAll();
     }
+    //Calcul de la note moyenne de chaque chambre
+    foreach ($chambres as &$chambre) {
+        $averageRating = $chambreRepository->findAverageRatingByChambreId($chambre->getId());
+        $chambre->setNoteMoyenne($averageRating);
+    }
+    
+    
 
     // Rendu du template Twig avec le formulaire et les chambres (filtrées ou non)
     return $this->render('chambre/index.html.twig', [
