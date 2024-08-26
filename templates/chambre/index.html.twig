@@ -91,9 +91,9 @@
                                     </div>
                                     <h6><span class="bg-primary text-white rounded py-1 px-3 ">{{ chambre.prix / 100 }} €/Nuit</span></h6>
                                     <div class="d-flex flex-wrap mb-3 mt-4">
-                                        <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>2 lits</small>
-                                        <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>3 Salle de bains</small>
-                                        <small> Services: {% for service in chambre.services %} {{service.nomService}}{% if not loop.last %}, {% endif %}{% endfor %}</small> 
+                                        <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>{{ chambre.lits }} {{ chambre.lits > 1 ? 'lits' : 'lit' }}</small>
+                                        <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>{{chambre.sallesDeBain}} salle de bain</small>
+                                        <small> Services:{% for service in chambre.services %} {{service.nomService}}{% if not loop.last %}, {% endif %}{% endfor %}</small> 
                                         
                                         
                                     </div>
