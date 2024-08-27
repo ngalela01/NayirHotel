@@ -40,7 +40,13 @@ class ReservationsController extends AbstractController
     // methode pour resrver une chambre spécifique
     #[Route('/chambres/{id}', name: 'app_chambres_reserver', methods: ['GET', 'POST'])]
     public function reserver(Request $request, Chambre $chambre, EntityManagerInterface $entityManager , Security $security , MailerInterface $mailer): Response
-    {
+    {   
+        $user = $security->getUser(); // Récupérer l'utilisateur actuellement connecté
+        if (!$user) {
+            $this->addFlash('warning', 'Vous devez être connecté pour effectuer une réservation.');
+            return $this->redirectToRoute('app_login'); // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+        }
+        
         $reservation = new Reservations();
         $reservation->setChambre($chambre);
         $form = $this->createForm(ReservationsType::class, $reservation);
@@ -48,12 +54,7 @@ class ReservationsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) 
         {
-            $user = $security->getUser(); // Récupérer l'utilisateur actuellement connecté
-            if ($user) {
-                $reservation->setUser($user); // Associer l'utilisateur à la réservation
-            } else {
-                throw new \Exception("Utilisateur non trouver");
-            }
+            $reservation->setUser($user); // Associer l'utilisateur à la réservation
             $reservation->setCreatedAt(new \DateTimeImmutable());
             $reservation->setConfirmation(false); // Par défaut à false pour les utilisateurs
             

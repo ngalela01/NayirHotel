@@ -39,15 +39,15 @@ class DashboardController extends AbstractDashboardController
     }
 
     public function configureMenuItems(): iterable
-    {  yield MenuItem::linkToRoute('NayirHotel', 'fa fa-hotel', 'app_acceuil');
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+    {  yield MenuItem::linkToRoute('NayirHotel', 'fa fa-home', 'app_acceuil');
+        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-tachometer-alt');
          yield MenuItem::linkToCrud('Utilisateur', 'fas fa-user', User::class)->setCssClass('.nayir');
          yield MenuItem::linkToCrud('Type de chambre', 'fas fa-list', TypeDeChambre::class);
-         yield MenuItem::linkToCrud('Les chambres', 'fas fa-list', Chambre::class);
+         yield MenuItem::linkToCrud('Les chambres', 'fas fa-bed', Chambre::class);
          yield MenuItem::linkToCrud('Sevices', 'fas fa-table-list', Service::class);
          yield MenuItem::linkToCrud('Images', 'fas fa-image', Images::class);
          yield MenuItem::linkToCrud('Commentaires des chambres', 'fas fa-comment', Commentaire::class);
-         yield MenuItem::linkToCrud('Les réservarations', 'fas fa-comment', Reservations::class);
+         yield MenuItem::linkToCrud('Les réservarations', 'fa fa-calendar-check', Reservations::class);
     }
     
 }
