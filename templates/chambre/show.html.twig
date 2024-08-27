@@ -5,7 +5,7 @@
 {% block body %}
 <!-- Page Header Start -->
 <div class="container-fluid page-header mb-5 p-0" style="background-image: url(/asset/img/carousel-2.jpg); height: 200px;">
-    <div class="container-fluid page-header-inner  h-100 ">
+    <div class="container-fluid page-header-inner h-100">
         <div class="row h-100 align-items-end">
             <div class="col-12">
                 <div class="d-flex align-items-center justify-content-between pb-3">
@@ -18,7 +18,7 @@
 </div>
 <!-- Page Header End -->
 
-<!-- Page room-detail start -->    
+<!-- Page room-detail start -->
 <div class="container">
     <div class="row">
         <div class="col-12">
@@ -28,48 +28,56 @@
                         <div class="carousel-inner">
                             {% for image in chambre.images %}
                                 <div class="carousel-item {% if loop.first %}active{% endif %}">
-                                    <img src="{{ vich_uploader_asset(image, 'imageFile') }}" class="d-block w-100  rounded  " alt="">
+                                    <img src="{{ vich_uploader_asset(image, 'imageFile') }}" class="d-block w-100 rounded" alt="">
                                 </div>
                             {% endfor %}
                         </div>
-
                         <ol class="carousel-indicators">
                             {% for image in chambre.images %}
-                                <li data-bs-target="#room-thumbnail--slide" data-bs-slide-to="{{ loop.index0 }}" class="  {% if loop.first %}active{% endif %}" aria-current="{% if loop.first %}true{% endif %}" aria-label="Slide {{ loop.index }}">
-                                    <img src="{{ vich_uploader_asset(image, 'imageFile') }}" class="d-block w-100 indicators-image " alt="">
+                                <li data-bs-target="#room-thumbnail--slide" data-bs-slide-to="{{ loop.index0 }}" class="{% if loop.first %}active{% endif %}" aria-current="{% if loop.first %}true{% endif %}" aria-label="Slide {{ loop.index }}">
+                                    <img src="{{ vich_uploader_asset(image, 'imageFile') }}" class="d-block w-100 indicators-image" alt="">
                                 </li>
                             {% endfor %}
-                         </ol>
+                        </ol>
                     </div>
                 </div>
 
-                 <!-- Room Features -->
-                <div class="room-features-area d-flex justify-content-center flex-wrap mb-5 ">
-                    <h6>Capacity: <span>{{chambre.capaciteAdulte}} Adultes & {{chambre.capaciteEnfant}} Enfants </span></h6>
-                    <h6>Lit: <span>{{chambre.lits}}</span></h6>
-                    
-                    <h6>Services:{% for service in chambre.services %} <span>{{service.nomService}}</span>{% endfor %}</h6>
-                    
-                    <h6>Salle de Bain: <span>{{chambre.sallesDeBain}}</span></h6>
+                <!-- Room Features -->
+                <div class="room-features-area d-flex justify-content-around flex-wrap mb-5">
+                    <h6>Capacité: <span>{{ chambre.capaciteAdulte }} Adultes & {{ chambre.capaciteEnfant }} Enfants</span></h6>
+                    <h6>Lit(s): <span>{{ chambre.lits }}</span></h6>
+                    <h6>Salle de Bain: <span>{{ chambre.sallesDeBain }}</span></h6>
+                    <h6>Services: 
+                        {% for service in chambre.services %}
+                            <span>{{ service.nomService }}</span>{% if not loop.last %}, {% endif %}
+                        {% endfor %}
+                    </h6>
                 </div>
-                <p class="text-center">{{chambre.typeDeChambre.description}}</p>
+
+                <!-- Room Description -->
+                <p class="text-center">{{ chambre.typeDeChambre.description }}</p>
+
+                <!-- Reservation Button -->
+                <div class="text-center">
+                    <a class="btn btn-primary btn-lg mt-4" href="{{ path('app_chambres_reserver', {'id': chambre.id}) }}">Réserver cette chambre</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 <!-- Page room-detail End -->
 
-<!-- section comment -->
-
-<div class="container mt-5 ms-4 mb-5">
+<!-- Section Comments -->
+<div class="container mt-5 mb-5">
     <div class="row">
-        <div class="col-12 mb-5 ">
+        <div class="col-12 mb-5">
             <h3>Avis Chambre</h3>
-            <a href="{{ path('app_commentaire_new', { 'chambreId': chambre.id }) }}">Ajouter commentaire</a>
+            <a href="{{ path('app_commentaire_new', { 'chambreId': chambre.id }) }}" class="btn btn-outline-primary">Ajouter un commentaire</a>
         </div>
 
         <div class="col-8">
-        {% if chambre.commentaires is not empty %}
-            {% for commentaire in chambre.commentaires %}
+            {% if chambre.commentaires is not empty %}
+                {% for commentaire in chambre.commentaires %}
                     <div class="d-flex align-items-center mb-4">
                         <div class="me-3">
                             <i class="fas fa-user-circle fa-4x text-muted"></i>
@@ -78,7 +86,7 @@
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <div>
                                     <span class="d-block text-muted">{{ commentaire.date|date('Y-m-d H:i:s') }}</span>
-                                    <h6 class="mb-0">{{commentaire.user.name}}</h6>
+                                    <h6 class="mb-0">{{ commentaire.user.name }}</h6>
                                 </div>
                                 <div class="ms-3 text-warning">
                                     {% set note = commentaire.note %}
@@ -91,25 +99,19 @@
                                     {% endfor %}
                                 </div>
                             </div>
-                            <p class="mb-0">{{commentaire.contenu}}</p>
+                            <p class="mb-0">{{ commentaire.contenu }}</p>
                         </div>
                     </div>
-            {% endfor %}
-        {% else %}
-            <p>Aucun commentaire</p>
-        {% endif %}
+                {% endfor %}
+            {% else %}
+                <p>Aucun commentaire disponible.</p>
+            {% endif %}
         </div>
     </div>
 </div>
+<!-- End Section Comments -->
 
-
-<!-- End page comment -->
-
-
-
-
-<!-- section contact -->
-
+<!-- Section Contact -->
 <section class="nayir-contact mb-0">
     <div class="container w-75 h-auto">
         <div class="contact-content" style="background-image: url(/asset/img/carousel-2.jpg);">
@@ -121,12 +123,12 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-5 text-md-right">
-                    <a href={{ path('app_contact') }} class="btn btn-primary btn-lg mb-5">Contactez maintenant</a>
+                    <a href="{{ path('app_contact') }}" class="btn btn-primary btn-lg mb-5">Contactez maintenant</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
+<!-- End Section Contact -->
 
-    
 {% endblock %}
